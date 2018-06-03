@@ -6,6 +6,7 @@
 
 var restArray = require("../data/restArray");
 var addRest = require("../data/addRest");
+var passport = require("../config/pass");
 
 
 // ===============================================================================
@@ -18,6 +19,26 @@ module.exports = function(app) {
   // In each of the below cases when a user visits a link
   // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
+
+  function auth(req, res, next, authMethod) {
+    passport.authenticate(authMethod, function (err, user, info) {
+      if (err) {
+        res.status(500)
+        res.json(err)
+      }
+      if (!user) {
+        res.status(401)
+        res.json(info.message)
+      }
+      else {
+        req.logIn(user, function (err) {
+          if (err) { return next(err); }
+          res.status(200)
+          res.json("/members");
+        });
+      }
+    })(req, res)
+  }
 
   app.get("/api/viewRest", function(req, res) {
     res.json(restArray);
@@ -34,6 +55,34 @@ module.exports = function(app) {
   // (ex. User fills out a reservation request... this data is then sent to the server...
   // Then the server saves the data to the restData array)
   // ---------------------------------------------------------------------------
+
+  app.post("/api/signup", function (req, res, next) {
+    auth(req, res, next, "local-signup")
+  });
+
+  // Route for logging user out
+  app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+  });
+
+  // Route for getting some data about our user to be used client side
+  app.get("/api/user_data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send to home page
+      res.redirect("/");
+    }
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
+  });
+
+
 
   app.post("/api/viewRest", function(req, res) {
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.

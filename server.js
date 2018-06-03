@@ -5,6 +5,8 @@
 
 var express = require("express");
 var bodyParser = require("body-parser");
+var passport = require("./config/pass");
+var session = require("express-session");
 
 // ==============================================================================
 // EXPRESS CONFIGURATION
@@ -20,6 +22,14 @@ var PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // ================================================================================
 // ROUTER
