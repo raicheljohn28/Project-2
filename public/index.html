@@ -28,7 +28,6 @@
 
     <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
 </head>
-
 <body>
     <div class="header">
         <div class="container">
@@ -305,10 +304,10 @@
             $.post("/api/viewRest", newRestaurant,
                 function (data) {
                     // If a table is available... tell user they are booked.
-                    if (data) {
+                    // if (data) {
                         console.log(data);
                         alert("Yay! New Restaurant has been added!");
-                    }
+                    // }
                     // If a table is available... tell user they on the waiting list.
                     //   else {
                     //     alert("Sorry an error occured");

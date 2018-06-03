@@ -9,6 +9,8 @@ CREATE TABLE restaurant
     url VARCHAR (100) NULL,
     rating INTEGER (10) NOT NULL,
     review VARCHAR (1000) NULL,
+    username varchar(255) NOT NULL,
+	password varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
