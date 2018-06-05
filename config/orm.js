@@ -32,7 +32,7 @@ function objToSql(ob) {
   // translate array of strings to a single comma-separated string
   return arr.toString();
 }
-
+  
 var orm = {
   all: function(table, cb) {
     var queryString = "SELECT * FROM " + table;
