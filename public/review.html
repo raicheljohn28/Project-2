@@ -81,13 +81,30 @@
         <div class="form-group">
             <label for="comment">Add a Review:</label>
             <textarea class="form-control" rows="5" id="comment"></textarea>
+
+            <div class="txt-center">
+                <form>
+                      <div class="rating">
+                          <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                          <label for="star5" >☆</label>
+                          <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                          <label for="star4" >☆</label>
+                          <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                          <label for="star3" >☆</label>
+                          <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                          <label for="star2" >☆</label>
+                          <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                          <label for="star1" >☆</label>
+                          <div class="clear"></div>
+                      </div>
+                  </form>
+              </div>
             <input type="text">
             <button type="submit" class="btn btn-primary submit">Submit Review</button>
         </div>
     </form>
 
     <p id="text-output"></p>
-
 
 
     <section class="map">
@@ -135,6 +152,20 @@
             var input = $input.val();
             $('#text-output').text("Your review: " + input);
         });
+
+        // Check Radio-box
+        // $(".rating input:radio").attr("checked", false);
+
+        // $('.rating input').click(function () {
+        //     $(".rating span").removeClass('checked');
+        //     $(this).parent().addClass('checked');
+        // });
+
+        // $('input:radio').change(
+        //     function () {
+        //         var userRating = this.value;
+        //         alert(userRating);
+        //     }); 
     </script>
 
 
