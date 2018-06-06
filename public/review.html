@@ -81,77 +81,77 @@
         <div class="form-group">
             <label for="comment">Add a Review:</label>
             <textarea class="form-control" rows="5" id="comment"></textarea>
-
-            <div class="txt-center">
-                <form>
-                      <div class="rating">
-                          <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
-                          <label for="star5" >☆</label>
-                          <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
-                          <label for="star4" >☆</label>
-                          <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
-                          <label for="star3" >☆</label>
-                          <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
-                          <label for="star2" >☆</label>
-                          <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
-                          <label for="star1" >☆</label>
-                          <div class="clear"></div>
-                      </div>
-                  </form>
-              </div>
-            <input type="text">
-            <button type="submit" class="btn btn-primary submit">Submit Review</button>
+        </div>
+        <input type="text">
+        <button type="submit" class="btn btn-primary submit">Submit Review</button>
         </div>
     </form>
 
-    <p id="text-output"></p>
+    <div class="txt-center">
+        <form>
+            <div class="rating">
+                <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                <label for="star5">☆</label>
+                <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                <label for="star4">☆</label>
+                <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                <label for="star3">☆</label>
+                <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                <label for="star2">☆</label>
+                <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                <label for="star1">☆</label>
+                <div class="clear"></div>
+            </div>
+        </form>
+
+        <p id="text-output"></p>
 
 
-    <section class="map">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="map">
-                        <!-- How to change your own map point
+        <section class="map">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map">
+                            <!-- How to change your own map point
             1. Go to Google Maps
             2. Click on your location point
             3. Click "Share" and choose "Embed map" tab
             4. Copy only URL and paste it within the src="" field below
         -->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.459655138843!2d-74.0662690845945!3d40.72991017932997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa62aa64130dd5112!2sHudson+County+Community+College+STEM+Building!5e0!3m2!1sen!2sus!4v1527953371128"
-                            width="1000" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.459655138843!2d-74.0662690845945!3d40.72991017932997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa62aa64130dd5112!2sHudson+County+Community+College+STEM+Building!5e0!3m2!1sen!2sus!4v1527953371128"
+                                width="1000" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <p>Copyright &copy; 2018</p>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>Copyright &copy; 2018</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="js/members.js"></script> -->
-    <script type="text/javascript">
-        $('form').on('submit', function (event) {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="js/members.js"></script> -->
+        <script type="text/javascript">
+            $('form').on('submit', function (event) {
 
-            // Prevent the page from reloading
-            event.preventDefault();
+                // Prevent the page from reloading
+                event.preventDefault();
 
-            // Set the text-output span to the value of the first input
-            var $input = $(this).find('input');
-            var input = $input.val();
-            $('#text-output').text("Your review: " + input);
-        });
+                // Set the text-output span to the value of the first input
+                var $input = $(this).find('input');
+                var input = $input.val();
+                $('#text-output').text("Your review: " + input);
+            });
 
         // Check Radio-box
         // $(".rating input:radio").attr("checked", false);
@@ -166,7 +166,7 @@
         //         var userRating = this.value;
         //         alert(userRating);
         //     }); 
-    </script>
+        </script>
 
 
 </body>
