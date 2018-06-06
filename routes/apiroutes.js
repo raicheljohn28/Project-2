@@ -7,6 +7,8 @@
 var restArray = require("../data/restArray");
 var addRest = require("../data/addRest");
 var passport = require("../config/pass");
+var rest = require("../models/users.js");
+
 
 
 // ===============================================================================
@@ -97,6 +99,14 @@ module.exports = function(app) {
       res.json(false);
     }
   });
+
+  app.post("/api/restaurant", function(req, res) {
+    rest.create([req.body.name], function(result) {
+      console.log(result);
+      // Send back the ID of the new quote
+      res.json({ id: result.insertId });
+    });
+  })
 
   // app.post("/api/addRest", function(req, res) {
   //   // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.

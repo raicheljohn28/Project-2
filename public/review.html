@@ -75,87 +75,18 @@
             </div>
         </div>
     </section>
-    <!-- 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Click to add review
-  </button>
-  
-  
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+
+
+    <form>
+        <div class="form-group">
+            <label for="comment">Add a Review:</label>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+            <input type="text">
+            <button type="submit" class="btn btn-primary submit">Submit Review</button>
         </div>
-        <div class="modal-body">
-          Write your mind out!
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save Review</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+    </form>
 
-    <div class="container">
-
-        <!-- <p>The form below contains a textarea for comments:</p> -->
-        <form>
-            <div class="form-group">
-                <label for="comment">Add a Review:</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
-                <!-- <button type="submit" id="form-submit" class="btn">Submit Review</button> -->
-                <button type="submit" class="btn btn-primary submit">Submit Review</button>
-            </div>
-        </form>
-    </div>
-
-
-
-    <!-- <section class="contact-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="section-heading">
-                        <h2>Message</h2>
-                    </div>
-                    <form id="contact" action="" method="post">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
-                                </fieldset>
-                                <fieldset>
-                                    <input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">
-                                </fieldset>
-                                <fieldset>
-                                    <input name="phone" type="text" class="form-control" id="phone" placeholder="Your phone..." required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-md-6">
-                                <fieldset>
-                                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-                                </fieldset>
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">Send Message</button>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </form> -->
-    <!-- </div> -->
-    <!-- <div class="col-md-6">
-                    <div class="section-heading contact-info">
-                        <h2>Contact Info</h2>
-                        <p>Pellentesque nec orci in erat venenatis viverra. Vivamus in lorem et leo feugiat ullamcorper. Donec volutpat fermentum erat non aliquet. Cras fermentum, risus a blandit sodales, erat turpis eleifend lacus, venenatis mollis leo lorem vel eros. Quisque et sem tempus, feugiat urna iaculis, tempor metus.<br><br><em>30 Raffles Ave, <br>Singapore 039803</em></p>
-                    </div>
-                </div> -->
-    <!-- </div>
-        </div>
-    </section> -->
+    <p id="text-output"></p>
 
 
 
@@ -191,87 +122,18 @@
     </footer>
 
 
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <script src="js/vendor/bootstrap.min.js"></script>
-
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // navigation click actions 
-            $('.scroll-link').on('click', function (event) {
-                event.preventDefault();
-                var sectionID = $(this).attr("data-id");
-                scrollToID('#' + sectionID, 750);
-            });
-            // scroll to top action
-            $('.scroll-top').on('click', function (event) {
-                event.preventDefault();
-                $('html, body').animate({ scrollTop: 0 }, 'slow');
-            });
-            // mobile nav toggle
-            $('#nav-toggle').on('click', function (event) {
-                event.preventDefault();
-                $('#main-nav').toggleClass("open");
-            });
-        });
-        // scroll function
-        function scrollToID(id, speed) {
-            var offSet = 0;
-            var targetOffset = $(id).offset().top - offSet;
-            var mainNav = $('#main-nav');
-            $('html,body').animate({ scrollTop: targetOffset }, speed);
-            if (mainNav.hasClass("open")) {
-                mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                mainNav.removeClass("open");
-            }
-        }
-        if (typeof console === "undefined") {
-            console = {
-                log: function () { }
-            };
-        }
-    </script> -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/members.js"></script>
+    <!-- <script type="text/javascript" src="js/members.js"></script> -->
     <script type="text/javascript">
-        // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
-        // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-        // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-        // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
-        $(".submit").on("click", function (event) {
+        $('form').on('submit', function (event) {
+
+            // Prevent the page from reloading
             event.preventDefault();
-            // Here we grab the form elements
-            var review;
-                // restaurantName: $("#restaurant-name").val().trim(),
-                // restaurantUrl: $("#restaurant-url").val().trim(),
-                // restaurantRating: $("#restaurant-rating").val().trim(),
-            // };
-            console.log(review);
-            // This line is the magic. It"s very similar to the standard ajax function we used.
-            // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-            // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-            // depending on if a tables is available or not.
-            $.post("/api/viewRest", review,
-                function (data) {
-                    // If a table is available... tell user they are booked.
-                    if (data) {
-                        alert("Yay! Your review is added!");
-                    }
-                    // If a table is available... tell user they on the waiting list.
-                    else {
-                        alert("Sorry an error occured");
-                    }
-                    // Clear the form when submitting
-                    // $("#restaurant-name").val("");
-                    // $("#restaurant-url").val("");
-                    // $("#restaurant-rating").val("");
-                });
+
+            // Set the text-output span to the value of the first input
+            var $input = $(this).find('input');
+            var input = $input.val();
+            $('#text-output').text("Your review: " + input);
         });
     </script>
 

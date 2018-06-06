@@ -4,7 +4,7 @@ $(function() {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
 
-        var name = $("[name=restaurant-name]").val().trim();
+        var name = $("[name=name]").val().trim();
 
         if(name !== "") {
             var newRestaurant = {
@@ -22,7 +22,7 @@ $(function() {
             });
         }
         else {
-            $("[name=restaurant-name]").val("");
+            $("[name=name]").val("");
         }
     });
 });

@@ -21,13 +21,20 @@
     <link href="./assets/css/bootstrap-theme.css.map" rel="stylesheet">
     <link href="./assets/css/bootstrap-theme.css" rel="stylesheet">
 
-    <!-- <link href="https://fonts.googleapis.com/css?family=Spectral:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i"
+    <link href="https://fonts.googleapis.com/css?family=Spectral:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="./assets/css/templatemo-style.css" rel="stylesheet">
 
     <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
 </head>
+<style>
+    td,th {
+        border: 1px solid #dddddd;
+        text-align: left; 
+        padding: 8px; 
+    }
+</style>
 <body>
     <div class="header">
         <div class="container">
@@ -93,56 +100,15 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-4 col-sm-12">
-
-                    <div class="right-info">
-                        <h4>Search for Restaurants</h4>
-                        <div class="col-md-6">
-                            <!-- <form action="#" method="post">
-                                <input type="text" name="email" placeholder="Username/Email">
-                                <input type="text" placeholder="Password">
-                                <button>Submit</button>
-                                <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button> 
-                            </form>  -->
-
-                <!-- <form class="form-inline active-purple-4">
-                                <input class="form-control form-control-sm mr-3 w-75" id="run-search" type="text" placeholder="Search" aria-label="Search">
-                                <button type="submit" class="btn btn-primary search">Search</button> -->
-                <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
-                <!-- </form>
-
-                            <br />
-
-                        </div> -->
-
-
-                <!-- <form class="create-form">
-                            <div class="form-group">
-                                <label for="name"></label>
-                                <h4>Add Restaurant</h4>
-                                <input type="text" class="form-control" id="restaurant-name" rows="2" cols="40">
-                                </textarea>
-                                <input type="text" class="form-control" id="restaurant-url">
-                                </textarea>
-                                <input type="text" class="form-control" id="restaurant-rating">
-                                </textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary add">Add</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
                 <div class="col-md-4 col-sm-12">
 
                     <div class="right-info">
                         <h4>Search Restaurant</h4>
                         <div class="input">
-                            <form action="#" method="post">
+                            <form action="/api/viewRest" method="post">
                                 <input type="text" name="restaurant" placeholder="ex; Red Lobster">
-                                <button>Search</button>
+                                <button class="search">Search</button>
+                            </form>
                                 <h4>Add Restaurant</h4>
                                 <div class="input">
                                     <form action="#" method="post">
@@ -160,20 +126,7 @@
         </div>
     </section>
 
-
-
-
-
-    <!-- <section class="get-app">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="primary-white-button">
-                                <a href="addNewRestaurant.html">Add Your Restaurant</a>
-                            </div>
-                        </div>
-                    </div>
-                </section> -->
+    <div id="first"></div>
 
 
 
@@ -319,37 +272,23 @@
                 });
         });
 
+        $("form").submit(function(e) {
+            // console.log("hello");
+            e.preventDefault();
+            $.ajax("/api/viewRest", {
+                type: "GET",
 
-        function runTableQuery() {
-            // Here we get the location of the root page.
-            // We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
-            var currentURL = window.location.origin;
-            // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-            $.ajax({ url: currentURL + "/api/viewRest", method: "GET" })
-                .then(function (tableData) {
-                    // Here we are logging the URL so we have access to it for troubleshooting
-                    console.log("------------------------------------");
-                    console.log("URL: " + currentURL + "/api/viewRest");
-                    console.log("------------------------------------");
-                    // Here we then log the NYTData to console, where it will show up as an object.
-                    console.log(tableData);
-                    console.log("------------------------------------");
-                    // Loop through and display each of the customers
-                    for (var i = 0; i < tableData.length; i++) {
-                        // Create the HTML Well (Section) and Add the table content for each reserved table
-                        var tableSection = $("<div>");
-                        tableSection.addClass("well");
-                        tableSection.attr("id", "tableWell-" + i + 1);
-                        $("#tableSection").append(tableSection);
-                        var tableNumber = i + 1;
-                        // Then display the remaining fields in the HTML (Section Name, Date, URL)
-                        $("#tableWell-" + i + 1).append("<h2><span class='label label-primary'>" + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
-                    }
-                });
-        }
+            }).then(function(data){
+                var first = $("#first");
+                console.log(data);
+                
 
-        runTableQuery();
+                for (var i = 0; i < data.length; i++){
+                    first.append($("<table><thead><tr><th>Restaurant Name</th><th>Ratings</th></tr></thead><tbody><tr><td>" + data[i].restaurantName + "</td><td>" + data[i].rating + "</td></tr></tbody></table>"));
 
+                }
+                })
+        });
     </script>
 
 </body>

@@ -5,7 +5,7 @@ var restArray = [
       rating: "4"
     },
     {
-        restaurantName: "Orale Mexican Kitchen",
+        restaurantName: "Orale Mexican",
         restaurantUrl: "https://www.oralemk.com/",
         rating: "3"
     },
