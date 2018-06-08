@@ -37,17 +37,17 @@ app.use(routes);
 
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // ================================================================================
 // ROUTER
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 // ================================================================================
-require("./routes/apiroutes")(app);
-require("./routes/htmlRoutes")(app);
+// require("./routes/apiroutes")(app);
+// require("./routes/htmlRoutes")(app);
 
 // =============================================================================
 // LISTENER

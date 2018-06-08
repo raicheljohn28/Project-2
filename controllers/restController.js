@@ -64,46 +64,63 @@ router.post("/api/review", function(req, res) {
   );
 });
 
-router.post("/api/login", function(req, res) {
-  auth(req, res, next, "local-login");
-})
+// router.post("/api/login", function(req, res) {
+//   auth(req, res, next, "local-login");
+// })
 
 
-function auth(req, res, next, authMethod) {
-  passport.authenticate(authMethod, function (err, user, info) {
-    if (err) {
-      res.status(500)
-      res.json(err)
-    }
-    if (!user) {
-      res.status(401)
-      res.json(info.message)
-    }
-    else {
-      req.logIn(user, function (err) {
-        if (err) { return next(err); }
-        res.status(200)
-        res.json("/members");
+// function auth(req, res, next, authMethod) {
+//   passport.authenticate(authMethod, function (err, user, info) {
+//     if (err) {
+//       res.status(500)
+//       res.json(err)
+//     }
+//     if (!user) {
+//       res.status(401)
+//       res.json(info.message)
+//     }
+//     else {
+//       req.logIn(user, function (err) {
+//         if (err) { return next(err); }
+//         res.status(200)
+//         res.json("/members");
 
-      });
-    }
-  })(req, res)
-}
+//       });
+//     }
+//   })(req, res)
+// }
 
 router.get("/review", function(req, res) {
  
   // console.log(req.body);
   review.all(
     function(result) {
-      var myHTML;
+      var myHTML = "<html><head><title>Restaurant Reviews List</title><link rel='stylesheet' type='text/css' href='/public/assets/css/templatemo-style.css'></head><h1>Restaurant Reviews Data</h1>" +
+      "<body>" +
+      "<section class='featured-food'>" +
+        "<div class='container'>" +
+            "<div class='row'>" +
+            "<div class='col-md-4'>" +
+                    "<div class='food-item'>" +
+                        "<table>";
+
+                       
+
+      
+     
       console.log(result)
       for(let i=0; i<result.length; i++){
-        myHTML += `<div id='${result[i].id}' class='container'>`;
-        myHTML += `<div>${result[i].restaurant}</div>`;
-        myHTML +=   `<div>${result[i].review}</div>`;
-        myHTML += `</div>`;
-        res.sendFile(__dirname +"../public/review.html");
+        
+        myHTML += `<tr id='${result[i].id}' class='container'>`;
+        myHTML += `<th>${result[i].username}</th>`;
+        myHTML += `<th>${result[i].restaurant}</th>`;
+        myHTML +=   `<th>${result[i].review}</th>`;
+        myHTML += `<th>${result[i].rating}</th>`;
+        myHTML += `</tr>`;
       }
+      myHTML += "</table>";
+      myHTML +=  "</div></div></div></div></section>" +
+       "</body></html>";
 
     // Configure the response to return a status code of 200 (meaning everything went OK), and to be an HTML document
     res.writeHead(200, { "Content-Type": "text/html" });

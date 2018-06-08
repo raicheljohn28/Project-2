@@ -1,32 +1,24 @@
-{{!--
-<h1>Cats!</h1>
-
-<h2>Cats that are not sleepy!</h2>
-
-<ul>
-    {{#each cats}} {{#unless sleepy}} {{> cats/cat-block sleep=true}} {{/unless}} {{/each}}
-</ul>
-
-<h2>Cats that are sleepy!</h2>
-
-<ul>
-    {{#each cats}} {{#if sleepy}} {{> cats/cat-block sleep=false}} {{/if}} {{/each}}
-</ul> --}}
-
-<h2>Add a Restaurant</h2>
+<h1>Log Into Your Account</h1>
+<h2>Login Form</h2>
 <form class="create-form">
 
     <div class="form-group">
-        <label for="ca">Restaurant Name:</label>
-        <input type="text" id="ca" name="name">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="email-input" placeholder="Email">
     </div>
 
     <div class="form-group">
-        <label for="rest">Url</label>
-        <br>
-        <label for="rest">Rating</label>
-        <br>
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="password-input" placeholder="Password">
     </div>
 
-    <button type="submit">Add</button>
+
+    <button type="submit">Login</button>
 </form>
+
+<br />
+<div>
+    <p>Or sign up
+        <a href="/">here</a>
+    </p>
+</div>

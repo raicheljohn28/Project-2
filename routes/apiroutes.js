@@ -6,92 +6,10 @@
 
 var restArray = require("../data/restArray");
 var addRest = require("../data/addRest");
-var passport = require("../config/pass");
+// var passport = require("../config/pass");
 var rest = require("../models/users.js");
-
-
-
-// ===============================================================================
-// ROUTING
-// ===============================================================================
-
-module.exports = function(app) {
-  // API GET Requests
-  // Below code handles when users "visit" a page.
-  // In each of the below cases when a user visits a link
-  // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
-  // ---------------------------------------------------------------------------
-
-  function auth(req, res, next, authMethod) {
-    passport.authenticate(authMethod, function (err, user, info) {
-      if (err) {
-        res.status(500)
-        res.json(err)
-      }
-      if (!user) {
-        res.status(401)
-        res.json(info.message)
-      }
-      else {
-        req.logIn(user, function (err) {
-          if (err) { return next(err); }
-          res.status(200)
-          res.json("/members");
-        });
-      }
-    })(req, res)
-  }
-
-   // Using the passport.authenticate middleware with our local strategy.
-  // If the user has valid login credentials, send them to the members page.
-  // Otherwise the user will be sent an error
-  app.post("/api/login", function(req, res, next) {
-    auth(req, res, next, "local-login");
-  });
-
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
-  app.post("/api/signup", function(req, res, next) {
-    auth(req, res, next, "local-signup");
-  });
-
-  // Route for logging user out
-  app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
-  });
-
-   // Route for getting some data about our user to be used client side
-   app.get("/api/user_data", function (req, res) {
-    if (!req.user) {
-      // The user is not logged in, send to home page
-      res.redirect("/");
-    }
-    else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-  });
-
-  // app.post("/api/addRest", function(req, res) {
-  //   user.addRestaurant(
-  //     ["restaurantName", "restaurantUrl", "review", "rating"],
-  //     [req.body.id, req.body.restaurantName, req.body.restaurantUrl, req.body.review, req.body.rating],
-  //     function(result) {
-  //       if (result.changedRows == 0) {
-  //         // If no rows were changed, then the ID must not exist, so 404
-  //         return res.status(404).end();
-  //       } else {
-  //         res.status(200).end();
-  //       }
-  //     }
-  //   );
-  // });
+var express = require("express");
+var app = express();
 
   app.post("/api/review", function(req, res) {
     console.log("=====================")  
@@ -202,5 +120,4 @@ module.exports = function(app) {
 
     console.log(restArray);
   });
-};
 
