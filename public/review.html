@@ -31,7 +31,7 @@
 <body>
     <div class="header">
         <div class="container">
-            <a href="#" class="navbar-brand scroll-top">RateZa</a>
+            <a href="#" class="navbar-brand scroll-top">kudozo</a>
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
@@ -75,6 +75,8 @@
             </div>
         </div>
     </section>
+    <br>
+   
 
 
     <form id="usrform">
@@ -82,32 +84,38 @@
             <label for="comment">Add a Review:</label>
             <textarea class="form-control" rows="5" id="comment"></textarea>
         </div> -->
-        <input type="text">
-        <button type="submit" class="btn btn-primary submit">Submit Review</button>
+        <!-- Name: <input type="text" name="username"><br>
+        Restaurant: <input type="text" name="restaurant-name"><br>
+        Review:  <textarea rows="4" cols="50" name="comment" form="usrform">
+            Enter text here...</textarea><br>
+        Rating: <input type="text" name="rating"><br> -->
+        <div>
+            <label for="username">Name: <abbr title="required">*</abbr></label>
+            <input id="username" type="text" name="username">
+            <label for="username">Restaurant: <abbr title="required">*</abbr></label>
+            <input id="restaurant-name" type="text" name="restaurant-name">
+            Review:  <textarea rows="4" cols="50" name="comment" form="usrform" id="restaurant-review">
+                Enter text here...</textarea><br>
+            Rating: <select id="restaurant-rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+
+
+          </div>
+          <br>
+
+        <button type="submit" class="btn btn-primary submit">Post Review</button>
         </div>
     </form>
     <br>
-    <textarea rows="4" cols="50" name="comment" form="usrform">
-        Enter text here...</textarea>
+    <!-- <textarea rows="4" cols="50" name="comment" form="usrform">
+        Enter text here...</textarea> -->
 
-    <div class="txt-center">
-        <form>
-            <div class="rating">
-                <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
-                <label for="star5">☆</label>
-                <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
-                <label for="star4">☆</label>
-                <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
-                <label for="star3">☆</label>
-                <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
-                <label for="star2">☆</label>
-                <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
-                <label for="star1">☆</label>
-                <div class="clear"></div>
-            </div>
-        </form>
-
-        <p id="text-output"></p>
+    <p id="text-output"></p>
     </div>
 
 
@@ -146,26 +154,62 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/members.js"></script> -->
     <script type="text/javascript">
-        $('form').on('submit', function (event) {
+        // $('form').on('submit', function (event) {
 
-            // Prevent the page from reloading
+        //     // Prevent the page from reloading
+        //     event.preventDefault();
+
+        //     // Set the text-output span to the value of the first input
+        //     var $input = $(this).find('input');
+        //     var input = $input.val();
+
+        //     $.ajax({
+        //         url: "/api/review",
+        //         method: "POST",
+        //         data: input
+        //     }).then(function (review) {
+        //         console.log(review)
+        //     })
+
+        //     $('#text-output').text(input);
+        // });
+
+        $(".submit").on("click", function (event) {
             event.preventDefault();
-
-            // Set the text-output span to the value of the first input
-            var $input = $(this).find('input');
-            var input = $input.val();
-
-            $.ajax({
-                    url: "/api/review",
-                    method: "POST",
-                    data: input
-                }).then(function(review) {
-                    console.log(review)
-                })
-
-            $('#text-output').text(input);
+            // Here we grab the form elements
+            var newReview = {
+                // username: $("#restaurant-name").val().trim(),
+                username: "Jana",
+                review: $("#restaurant-review").val().trim(),
+                restaurant: $("#restaurant-name").val().trim(),
+                // restaurantUrl: $("#restaurant-url").val().trim(),
+                rating: $("#restaurant-rating").val().trim(),
+            };
+            console.log(newReview);
+            // This line is the magic. It"s very similar to the standard ajax function we used.
+            // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+            // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+            // depending on if a tables is available or not.
+            $.post("/api/review", newReview,
+                function (data) {
+                    // If a table is available... tell user they are booked.
+                    // if (data) {
+                    console.log(data);
+                    alert("Yay! New Review has been added!");
+                    // }
+                    // If a table is available... tell user they on the waiting list.
+                    //   else {
+                    //     alert("Sorry an error occured");
+                    //   }
+                    // Clear the form when submitting
+                    $("#username").val("");
+                    $("#restaurant-name").val("");
+                    // $("#restaurant-url").val("");
+                    $("#restaurant-rating").val("");
+                    $("#restaurant-review").val("");
+                    
+                });
         });
-
     </script>
 
 

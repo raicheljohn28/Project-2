@@ -5,6 +5,9 @@ var review = require("../models/review.js");
 
 // Import the model (cat.js) to use its database functions.
 var rest = require("../models/users.js");
+var path = require("path");
+var http = require("http");
+var fs = require("fs");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
@@ -81,15 +84,36 @@ function auth(req, res, next, authMethod) {
         if (err) { return next(err); }
         res.status(200)
         res.json("/members");
-        
+
       });
     }
   })(req, res)
 }
 
+router.get("/review", function(req, res) {
+ 
+  // console.log(req.body);
+  review.all(
+    function(result) {
+      var myHTML;
+      console.log(result)
+      for(let i=0; i<result.length; i++){
+        myHTML += `<div id='${result[i].id}' class='container'>`;
+        myHTML += `<div>${result[i].restaurant}</div>`;
+        myHTML +=   `<div>${result[i].review}</div>`;
+        myHTML += `</div>`;
+        res.sendFile(__dirname +"../public/review.html");
+      }
 
+    // Configure the response to return a status code of 200 (meaning everything went OK), and to be an HTML document
+    res.writeHead(200, { "Content-Type": "text/html" });
 
+    // End the response by sending the client the myHTML string (which gets rendered as an HTML document thanks to the code above)
+    res.end(myHTML);
 
+    }
+  );
+});
 
 // Export routes for server.js to use.
 module.exports = router;

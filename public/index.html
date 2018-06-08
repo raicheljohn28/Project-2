@@ -29,16 +29,18 @@
     <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
 </head>
 <style>
-    td,th {
+    td,
+    th {
         border: 1px solid #dddddd;
-        text-align: left; 
-        padding: 8px; 
+        text-align: left;
+        padding: 8px;
     }
 </style>
+
 <body>
     <div class="header">
         <div class="container">
-            <a href="#" class="navbar-brand scroll-top">RateZa</a>
+            <a href="#" class="navbar-brand scroll-top">kudozo</a>
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
@@ -106,18 +108,8 @@
                         <h4>Search Restaurant</h4>
                         <div class="input">
                             <form action="/api/viewRest" method="post">
-                                <input type="text" name="restaurant" placeholder="ex; Red Lobster">
+                                <input type="text" name="restaurant" placeholder="ex: Red Lobster">
                                 <button class="search">Search</button>
-                            </form>
-                                <h4>Add Restaurant</h4>
-                                <div class="input">
-                                    <form action="#" method="post">
-                                        <input type="text" class="form-control" id="restaurant-name" rows="2" cols="40">
-                                        <input type="text" class="form-control" id="restaurant-review" rows="2" cols="40">
-                                        <input type="text" class="form-control" id="restaurant-rating" rows="2" cols="40">
-                                        <button class="add">Add</button>
-                                    </form>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -144,8 +136,7 @@
                         <img src="./assets/image/Longhorn-Steakhouse-Logo.jpg" alt="">
                         <div class="text-content">
                             <img src="./assets/image/Five-Star-Review-Icon.jpg" width="30px" alt="">
-                            <p>Dreamcatcher squid ennui cliche chicharros nes echo small batch jean shorts hexagon street art
-                                knausgaard wolf...</p>
+                            <p>“I ordered the Peanut Butter Chocolate Cheesecake, which is considered to be a "Sweet Bites" dessert menu item because it is smaller than the regular sized desserts.”</p>
                         </div>
                     </div>
                 </div>
@@ -156,7 +147,7 @@
                         <div class="text-content">
 
                             <img src="./assets/image/Five-Star-Review-Icon.jpg" width="30px" alt="">
-                            <p> chicharros nes echo small batch jean shorts hexagon street art knausgaard wolf...</p>
+                            <p> Food was all right. I tried to skewer a hush puppy on my fork and it was so dry it exploded like a dirt bomb.</p>
                         </div>
                     </div>
                 </div>
@@ -167,16 +158,13 @@
                         <div class="text-content">
 
                             <img src="./assets/image/Five-Star-Review-Icon.jpg" width="30px" alt="">
-                            <p>Dreamcatcher cliche chicharros nes echo small batch jean shorts hexagon street art knaus.
-                            </p>
+                            <p>“Overall, if I were in the area I would go back and try the crab legs or lobsters at this establishment.”</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
 
     <section class="services">
 
@@ -241,56 +229,56 @@
         // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
         // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
         // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
-        $(".add").on("click", function (event) {
-            event.preventDefault();
-            // Here we grab the form elements
-            var newReview = {
-                // username: $("#restaurant-name").val().trim(),
-                username: "Jana",
-                review: $("#restaurant-review").val().trim(),
-                restaurant: $("#restaurant-name").val().trim(),
-                // restaurantUrl: $("#restaurant-url").val().trim(),
-                rating: $("#restaurant-rating").val().trim(),
-            };
-            console.log(newReview);
-            // This line is the magic. It"s very similar to the standard ajax function we used.
-            // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-            // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-            // depending on if a tables is available or not.
-            $.post("/api/review", newReview,
-                function (data) {
-                    // If a table is available... tell user they are booked.
-                    // if (data) {
-                        console.log(data);
-                        alert("Yay! New Restaurant has been added!");
-                    // }
-                    // If a table is available... tell user they on the waiting list.
-                    //   else {
-                    //     alert("Sorry an error occured");
-                    //   }
-                    // Clear the form when submitting
-                    $("#restaurant-name").val("");
-                    $("#restaurant-url").val("");
-                    $("#restaurant-rating").val("");
-                });
-        });
+        // $(".add").on("click", function (event) {
+        //     event.preventDefault();
+        //     // Here we grab the form elements
+        //     var newReview = {
+        //         // username: $("#restaurant-name").val().trim(),
+        //         username: "Jana",
+        //         review: $("#restaurant-review").val().trim(),
+        //         restaurant: $("#restaurant-name").val().trim(),
+        //         // restaurantUrl: $("#restaurant-url").val().trim(),
+        //         rating: $("#restaurant-rating").val().trim(),
+        //     };
+        //     console.log(newReview);
+        //     // This line is the magic. It"s very similar to the standard ajax function we used.
+        //     // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+        //     // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+        //     // depending on if a tables is available or not.
+        //     $.post("/api/review", newReview,
+        //         function (data) {
+        //             // If a table is available... tell user they are booked.
+        //             // if (data) {
+        //                 console.log(data);
+        //                 alert("Yay! New Restaurant has been added!");
+        //             // }
+        //             // If a table is available... tell user they on the waiting list.
+        //             //   else {
+        //             //     alert("Sorry an error occured");
+        //             //   }
+        //             // Clear the form when submitting
+        //             $("#restaurant-name").val("");
+        //             $("#restaurant-url").val("");
+        //             $("#restaurant-rating").val("");
+        //         });
+        // });
 
-        $("form").submit(function(e) {
+        $("form").submit(function (e) {
             // console.log("hello");
             e.preventDefault();
             $.ajax("/api/viewRest", {
                 type: "GET",
 
-            }).then(function(data){
+            }).then(function (data) {
                 var first = $("#first");
                 console.log(data);
-                
 
-                for (var i = 0; i < data.length; i++){
-                    first.append($("<table><thead><tr><th>Restaurant Name</th><th>Ratings</th></tr></thead><tbody><tr><td>" + data[i].restaurantName + "</td><td>" + data[i].rating + "</td></tr></tbody></table>"));
+
+                for (var i = 0; i < data.length; i++) {
+                    first.append($("<div class='container'><table><thead><tr><th>Restaurant Name</th><th>Ratings</th><th>Reviews</th></tr></thead><tbody><tr><td>" + data[i].restaurantName + "</td><td>" + data[i].rating + "</td><td>" + data[i].review + "</td></tr></tbody></table></div>"));
 
                 }
-                })
+            })
         });
     </script>
 

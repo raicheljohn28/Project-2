@@ -76,8 +76,8 @@ p {
 
 .navbar-brand {
     font-family: 'Spectral', serif;
-    font-size: 44px;
-    color: #121212;
+    font-size: 80px;
+    color: purple;
     font-style: italic;
     text-align: center;
     width: 100%;
@@ -164,7 +164,7 @@ bootstrap.min.css:5 .navbar-toggle {
     margin-top: 0px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 30px;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -683,7 +683,7 @@ section.page-heading {
 
 .page-heading p {
     color: #fff;
-    font-size: 14px;
+    font-size: 20px;
     padding: 0px 25%;
     margin-bottom: 0px;
 }
@@ -1048,6 +1048,7 @@ section.map #map {
         line-height: 60px;
         color: #fff;
         margin-top: 5px;
+        text-align: center;
     }
     .breakfast-menu-content .left-image {
         margin: -30px 0px 30px -30px;
