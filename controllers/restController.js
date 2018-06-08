@@ -8,6 +8,7 @@ var rest = require("../models/users.js");
 var path = require("path");
 var http = require("http");
 var fs = require("fs");
+var passport = require("../config/pass.js")
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
@@ -19,6 +20,14 @@ router.get("/", function(req, res) {
     res.render("index", hbsObject);
   });
 });
+
+router.get("/auth/google", passport.authenticate('google', {
+  scope: ['profile', 'email']
+}))
+
+router.get("/auth/google/callback", passport.authenticate('google'))
+
+
 
 router.post("/api/addRest", function(req, res) {
     rest.create([req.body.name], function(result) {

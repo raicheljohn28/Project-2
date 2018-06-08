@@ -6,21 +6,22 @@ var express = require("express");
 passport.use(new GoogleStrategy({
   clientID: '415330873045-cr1ic7lv18h65jqrohfa1nl8klovus7u.apps.googleusercontent.com',
   clientSecret: 'n6Xtvkciu8NSxN2ghOq3xGxV',
-  callbackURL: "http://www.example.com/auth/google/callback"
-}, (accessToken) => {
-  
+  callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  console.log(accessToken);
+  console.log(refreshToken);
+  console.log(profile);
 
 }))
 
-const app = express();
+// const app = express();
 
-app.get("/auth/google", passport.authenticate('google', {
-  scope: ['profile', 'email']
-}))
+// app.get("/auth/google", passport.authenticate('google', {
+//   scope: ['profile', 'email']
+// }))
 
-app.get("/auth/google/callback", passport.authenticate('google', {
+// app.get("/auth/google/callback", passport.authenticate('google'))
 
-}))
 // function(accessToken, refreshToken, profile, cb) {
 //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
 //     return cb(err, user);
