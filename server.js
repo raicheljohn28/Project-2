@@ -7,6 +7,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var passport = require("./config/pass");
 var session = require("express-session");
+var path = require("path");
 
 // ==============================================================================
 // EXPRESS CONFIGURATION
@@ -22,9 +23,18 @@ var PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.use(bodyParser.json());
 app.use(express.static("public"));
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+var routes = require("./controllers/restController.js");
+
+app.use(routes);
+
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
@@ -45,5 +55,5 @@ require("./routes/htmlRoutes")(app);
 // =============================================================================
 
 app.listen(PORT, function() {
-    console.log("App listening on PORT: " + PORT);
+  console.log("Server listening on: http://localhost:" + PORT);
   });

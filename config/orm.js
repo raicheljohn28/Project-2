@@ -62,6 +62,7 @@ var orm = {
     queryString += ") ";
 
     // console.log(queryString);
+    // INSERT INTO review (username, restaurant, review, rating) VALUES (?, ?, ?, ?)
 
     connection.query(queryString, vals, function(err, result) {
         if (err) {

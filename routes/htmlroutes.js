@@ -29,13 +29,6 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/review.html"));
   });
 
-  // app.get("/signUp", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/signUp.html"));
-  // });
-
-  // app.get("/login", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/login.html"));
-  // });
 
   // If no matching route is found default to home
   app.get("*", function(req, res) {

@@ -38,7 +38,7 @@
 <body>
     <div class="header">
         <div class="container">
-            <a href="#" class="navbar-brand scroll-top">Restaurant Rating App</a>
+            <a href="#" class="navbar-brand scroll-top">RateZa</a>
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Restaurant Rating App</h2>
+                        <h2>RateZa</h2>
                     </div>
                 </div>
                 <div class="col-md-4 col-md-offset-2 col-sm-12">
@@ -113,7 +113,7 @@
                                 <div class="input">
                                     <form action="#" method="post">
                                         <input type="text" class="form-control" id="restaurant-name" rows="2" cols="40">
-                                        <input type="text" class="form-control" id="restaurant-url" rows="2" cols="40">
+                                        <input type="text" class="form-control" id="restaurant-review" rows="2" cols="40">
                                         <input type="text" class="form-control" id="restaurant-rating" rows="2" cols="40">
                                         <button class="add">Add</button>
                                     </form>
@@ -244,17 +244,20 @@
         $(".add").on("click", function (event) {
             event.preventDefault();
             // Here we grab the form elements
-            var newRestaurant = {
-                restaurantName: $("#restaurant-name").val().trim(),
-                restaurantUrl: $("#restaurant-url").val().trim(),
-                restaurantRating: $("#restaurant-rating").val().trim(),
+            var newReview = {
+                // username: $("#restaurant-name").val().trim(),
+                username: "Jana",
+                review: $("#restaurant-review").val().trim(),
+                restaurant: $("#restaurant-name").val().trim(),
+                // restaurantUrl: $("#restaurant-url").val().trim(),
+                rating: $("#restaurant-rating").val().trim(),
             };
-            console.log(newRestaurant);
+            console.log(newReview);
             // This line is the magic. It"s very similar to the standard ajax function we used.
             // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
             // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
             // depending on if a tables is available or not.
-            $.post("/api/viewRest", newRestaurant,
+            $.post("/api/review", newReview,
                 function (data) {
                     // If a table is available... tell user they are booked.
                     // if (data) {

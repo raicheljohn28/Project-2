@@ -31,7 +31,7 @@
 <body>
     <div class="header">
         <div class="container">
-            <a href="#" class="navbar-brand scroll-top">Restaurant Rating App</a>
+            <a href="#" class="navbar-brand scroll-top">RateZa</a>
             <nav class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
@@ -77,15 +77,18 @@
     </section>
 
 
-    <form>
-        <div class="form-group">
+    <form id="usrform">
+        <!-- <div class="form-group">
             <label for="comment">Add a Review:</label>
             <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div>
+        </div> -->
         <input type="text">
         <button type="submit" class="btn btn-primary submit">Submit Review</button>
         </div>
     </form>
+    <br>
+    <textarea rows="4" cols="50" name="comment" form="usrform">
+        Enter text here...</textarea>
 
     <div class="txt-center">
         <form>
@@ -105,68 +108,65 @@
         </form>
 
         <p id="text-output"></p>
+    </div>
 
 
-        <section class="map">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="map">
-                            <!-- How to change your own map point
+    <section class="map">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="map">
+                        <!-- How to change your own map point
             1. Go to Google Maps
             2. Click on your location point
             3. Click "Share" and choose "Embed map" tab
             4. Copy only URL and paste it within the src="" field below
         -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.459655138843!2d-74.0662690845945!3d40.72991017932997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa62aa64130dd5112!2sHudson+County+Community+College+STEM+Building!5e0!3m2!1sen!2sus!4v1527953371128"
-                                width="1000" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                        </div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.459655138843!2d-74.0662690845945!3d40.72991017932997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa62aa64130dd5112!2sHudson+County+Community+College+STEM+Building!5e0!3m2!1sen!2sus!4v1527953371128"
+                            width="1000" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Copyright &copy; 2018</p>
-                    </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Copyright &copy; 2018</p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script type="text/javascript" src="js/members.js"></script> -->
-        <script type="text/javascript">
-            $('form').on('submit', function (event) {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/members.js"></script> -->
+    <script type="text/javascript">
+        $('form').on('submit', function (event) {
 
-                // Prevent the page from reloading
-                event.preventDefault();
+            // Prevent the page from reloading
+            event.preventDefault();
 
-                // Set the text-output span to the value of the first input
-                var $input = $(this).find('input');
-                var input = $input.val();
-                $('#text-output').text("Your review: " + input);
-            });
+            // Set the text-output span to the value of the first input
+            var $input = $(this).find('input');
+            var input = $input.val();
 
-        // Check Radio-box
-        // $(".rating input:radio").attr("checked", false);
+            $.ajax({
+                    url: "/api/review",
+                    method: "POST",
+                    data: input
+                }).then(function(review) {
+                    console.log(review)
+                })
 
-        // $('.rating input').click(function () {
-        //     $(".rating span").removeClass('checked');
-        //     $(this).parent().addClass('checked');
-        // });
+            $('#text-output').text(input);
+        });
 
-        // $('input:radio').change(
-        //     function () {
-        //         var userRating = this.value;
-        //         alert(userRating);
-        //     }); 
-        </script>
+    </script>
 
 
 </body>

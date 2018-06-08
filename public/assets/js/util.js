@@ -25,7 +25,7 @@ function handleLoginSugnup(form, url) {
 
     // AUTHUser does a post to the url and if successful, redirects us the the members page
     function authUser(email, password) {
-        $.post(url, {
+        $.post("/this is your route", {
             email: email,
             password: password
         }).then(function (data) {

@@ -42,6 +42,93 @@ module.exports = function(app) {
     })(req, res)
   }
 
+   // Using the passport.authenticate middleware with our local strategy.
+  // If the user has valid login credentials, send them to the members page.
+  // Otherwise the user will be sent an error
+  app.post("/api/login", function(req, res, next) {
+    auth(req, res, next, "local-login");
+  });
+
+  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
+  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+  // otherwise send back an error
+  app.post("/api/signup", function(req, res, next) {
+    auth(req, res, next, "local-signup");
+  });
+
+  // Route for logging user out
+  app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+  });
+
+   // Route for getting some data about our user to be used client side
+   app.get("/api/user_data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send to home page
+      res.redirect("/");
+    }
+    else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id
+      });
+    }
+  });
+
+  // app.post("/api/addRest", function(req, res) {
+  //   user.addRestaurant(
+  //     ["restaurantName", "restaurantUrl", "review", "rating"],
+  //     [req.body.id, req.body.restaurantName, req.body.restaurantUrl, req.body.review, req.body.rating],
+  //     function(result) {
+  //       if (result.changedRows == 0) {
+  //         // If no rows were changed, then the ID must not exist, so 404
+  //         return res.status(404).end();
+  //       } else {
+  //         res.status(200).end();
+  //       }
+  //     }
+  //   );
+  // });
+
+  app.post("/api/review", function(req, res) {
+    console.log("=====================")  
+    console.log(req.body);
+    // review.create(
+    //   ["restaurantName","username", "review", "rating"],
+    //   [req.body.name, req.body.restaurantName, req.body.username, req.body.review, req.body.rating],
+    //   function(result) {
+    //     if (result.changedRows == 0) {
+    //       // If no rows were changed, then the ID must not exist, so 404
+    //       return res.status(404).end();
+    //     } else {
+    //       res.status(200).end();
+    //     }
+    //   }
+    // );
+  });
+
+  // app.put("/api/review", function(req, res) {
+  //   console.log(req.body);
+  //   var condition = `id = ${req.body.id}`;
+  //   user.update(
+  //     {
+  //       review: req.body.review,
+  //       username: req.body.username
+  //     },
+  //     condition,
+  //     function(result) {
+  //       if (result.changedRows == 0) {
+  //         return res.status(404).end();
+  //       } else {
+  //         res.status(200).end();
+  //       }
+  //     }
+  //   );
+  // });
+
   app.get("/api/viewRest", function(req, res) {
     res.json(restArray);
   });
@@ -58,38 +145,14 @@ module.exports = function(app) {
   // Then the server saves the data to the restData array)
   // ---------------------------------------------------------------------------
 
-  app.post("/api/signup", function (req, res, next) {
-    auth(req, res, next, "local-signup")
-  });
-
-  // Route for logging user out
-  app.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
-  });
-
-  // Route for getting some data about our user to be used client side
-  app.get("/api/user_data", function (req, res) {
-    if (!req.user) {
-      // The user is not logged in, send to home page
-      res.redirect("/");
-    }
-    else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-  });
-
-
-
   app.post("/api/viewRest", function(req, res) {
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body-parser middleware
+
+
+
+
     if (restArray.length < 5) {
       restArray.push(req.body);
       res.json(true);
@@ -106,21 +169,30 @@ module.exports = function(app) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
     });
-  })
+  });
 
-  // app.post("/api/addRest", function(req, res) {
-  //   // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-  //   // It will do this by sending out the value "true" have a table
-  //   // req.body is available since we're using the body-parser middleware
-  //   if (restData.length < 5) {
-  //     restData.push(req.body);
-  //     res.json(true);
-  //   }
-  //   else {
-  //     addData.push(req.body);
-  //     res.json(false);
-  //   }
+  // app.post("/restaurant", function(req, res) {
+  //   var postData = req.body;
+  //   connection.query("INSERT INTO restaurant SET ? ", postData, function(error, results, field) {
+  //     if(error) throw error;
+  //     res.end(JSON.stringify(results));
+  //   });
   // });
+
+  app.post("/api/addRest", function(req, res) {
+    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
+    // It will do this by sending out the value "true" have a table
+    // req.body is available since we're using the body-parser middleware
+    if (restData.length < 5) {
+      restData.push(req.body);
+      res.json(true);
+    }
+    else {
+      addData.push(req.body);
+      res.json(false);
+    }
+  });
+
 
   // ---------------------------------------------------------------------------
   // I added this below code so you could clear out the table while working with the functionality.
