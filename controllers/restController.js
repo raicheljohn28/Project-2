@@ -25,10 +25,14 @@ router.get("/auth/google", passport.authenticate('google', {
   scope: ['profile', 'email']
 }))
 
-router.get("/auth/google/callback", passport.authenticate('google', {
-  successRedirect: '../public/review.html',
-  failureRedirect: '/'
-}))
+router.get("/auth/google/callback", passport.authenticate('google', { failureRedirect: '/login' }),
+function(req, res) {
+  // Successful authentication, redirect home.
+  res.redirect('../public/review.html');
+});
+//   successRedirect: '../public/review.html',
+//   failureRedirect: '/'
+// }))
 
 
 router.post("/api/addRest", function (req, res) {

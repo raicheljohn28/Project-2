@@ -35,6 +35,8 @@ var routes = require("./controllers/restController.js");
 
 app.use(routes);
 
+require("./routes/apiroutes.js")(app)
+require("./routes/htmlroutes.js")(app)
 
 // We need to use sessions to keep track of our user's login status
 // app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
@@ -54,6 +56,6 @@ app.use(routes);
 // The below code effectively "starts" our server
 // =============================================================================
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("Server listening on: http://localhost:" + PORT);
-  });
+});
