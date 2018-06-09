@@ -51,7 +51,10 @@
                             <a href="review.html">Add Review</a>
                         </li>
                         <li>
-                            <a href="">Login</a>
+                            <a href="/review">Review Data</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8080/auth/google">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -76,7 +79,7 @@
         </div>
     </section>
     <br>
-   
+
 
 
     <form id="usrform">
@@ -90,23 +93,28 @@
             Enter text here...</textarea><br>
         Rating: <input type="text" name="rating"><br> -->
         <div>
-            <label for="username">Name: <abbr title="required">*</abbr></label>
+            <label for="username">Name:
+                <abbr title="required">*</abbr>
+            </label>
             <input id="username" type="text" name="username">
-            <label for="username">Restaurant: <abbr title="required">*</abbr></label>
-            <input id="restaurant-name" type="text" name="restaurant-name">
-            Review:  <textarea rows="4" cols="50" name="comment" form="usrform" id="restaurant-review">
-                Enter text here...</textarea><br>
-            Rating: <select id="restaurant-rating">
+            <label for="username">Restaurant:
+                <abbr title="required">*</abbr>
+            </label>
+            <input id="restaurant-name" type="text" name="restaurant-name"> Review:
+            <textarea rows="4" cols="50" name="comment" form="usrform" id="restaurant-review">
+                Enter text here...</textarea>
+            <br> Rating:
+            <select id="restaurant-rating">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-              </select>
+            </select>
 
 
-          </div>
-          <br>
+        </div>
+        <br>
 
         <button type="submit" class="btn btn-primary submit">Post Review</button>
         </div>
@@ -207,7 +215,7 @@
                     // $("#restaurant-url").val("");
                     $("#restaurant-rating").val("");
                     $("#restaurant-review").val("");
-                    
+
                 });
         });
     </script>
