@@ -21,7 +21,7 @@ Options for an ‘Organic Only’ and ‘Probiotic Only’ search.
  
  ‘Mouse over’ option for the synopsis of the dish on the A La Carte.
  
- 
+ ![](kudozo.png)
  
  The project is been deployed on heroku and can be found in the link below:
 
